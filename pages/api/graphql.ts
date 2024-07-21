@@ -5,6 +5,7 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { resolvers } from "../../graphql/resolver";
 import { typeDefs } from "../../graphql/schema";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import dbConnect from "../../mongoose/middleware/db-connect";
 
 //@ts-ignore
 const server = new ApolloServer({
@@ -27,5 +28,10 @@ const allowCors =
     }
     return await fn(req, res);
   };
+const connectDB =
+  (fn: NextApiHandler) => async (req: NextApiRequest, res: NextApiResponse) => {
+    await dbConnect();
+    return await fn(req, res);
+  };
 
-export default allowCors(handler);
+export default connectDB(allowCors(handler));
