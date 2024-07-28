@@ -1,4 +1,12 @@
 import { sum } from "./sum";
+
+jest.mock("../helpers/sum");
+
+// Provide a mock implementation for sum
+(sum as jest.Mock).mockImplementation((arr: number[]) =>
+  arr.reduce((a, b) => a + b, 0),
+);
+
 const fibonacci = (length: number): string => {
   const sequence: number[] = [];
   for (let i = 0; i < length; i++) {

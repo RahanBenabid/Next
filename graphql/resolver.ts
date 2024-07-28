@@ -1,5 +1,5 @@
-import { WeatherInterface } from "../mongoose/weather/interface";
 import { findByZip, updateByZip } from "../mongoose/weather/services";
+import { WeatherInterface } from "../mongoose/weather/interface";
 
 export const resolvers = {
   Query: {
